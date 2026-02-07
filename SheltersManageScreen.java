@@ -3,17 +3,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
 import Controller.DataController;
-import Controller.Model.TypeCitizens;
 
 public class SheltersManageScreen {
+    Main m;
     DataController dataController = new DataController();
     JFrame main;
     JPanel panel;
     JLabel shelterHeader;
     JLabel riskHeader;
     JLabel vipHeader;
+    JButton backButton;
     ArrayList<JButton> shelterButtons = new ArrayList<>();
 
     SheltersManageScreen() {
@@ -32,9 +32,13 @@ public class SheltersManageScreen {
         shelterHeader.setBounds(400, 100, 200, 50);
         addButtonShelter(400, 100);
 
+        backButton = new JButton("Back");
+        backButton.setBounds(1700, 50, 200, 50);
+
         buttonAction();
 
         main.add(shelterHeader);
+        main.add(backButton);
     }
 
     void addButtonShelter(int posX, int posY) {
@@ -49,17 +53,17 @@ public class SheltersManageScreen {
 
     void buttonAction() {
         MyActionListener listener = new MyActionListener();
+        backButton.addActionListener(listener);
         
     }
     private class MyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            JButton source = (JButton)e.getSource();
+            if(source == backButton) {
+                m = new Main();
+                main.dispose();
+            }
         }
-    }
-
-    public static void main(String[] args) {
-        SheltersManageScreen rs = new SheltersManageScreen();
-
     }
 }

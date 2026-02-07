@@ -7,15 +7,15 @@ import javax.swing.*;
 import Controller.DataController;
 
 public class Main {
+    SheltersManageScreen sms;
+    ReportScreen rs;
+    RegisterScreen regs;
     DataController dataController = new DataController();
     JFrame main;
     JPanel panel;
     JButton reportButton;
     JButton registerButton;
     JButton shelterButton;
-    ArrayList<JButton> normalButtons = new ArrayList<>();
-    ArrayList<JButton> riskButtons = new ArrayList<>();
-    ArrayList<JButton> vipButtons = new ArrayList<>();
 
     Main() {
         main = new JFrame("Main Page");
@@ -45,20 +45,33 @@ public class Main {
         main.add(registerButton);
     }
 
-
     void buttonAction() {
         MyActionListener listener = new MyActionListener();
-        
+        shelterButton.addActionListener(listener);
+        reportButton.addActionListener(listener);
+        registerButton.addActionListener(listener);   
     }
+
     private class MyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            JButton source = (JButton)e.getSource();
+            if(source == shelterButton) {
+                sms = new SheltersManageScreen();
+                main.dispose();
+            }
+            else if(source == reportButton) {
+            rs = new ReportScreen();
+                main.dispose();
+            }
+            else if(source == registerButton) {
+                regs = new RegisterScreen();
+                main.dispose();
+            }
         }
     }
 
     public static void main(String[] args) {
         Main rs = new Main();
-
     }
 }

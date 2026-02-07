@@ -8,12 +8,13 @@ import Controller.DataController;
 
 
 public class ReportScreen {
+    Main m;
     DataController dataController = new DataController();
     JFrame main;
     JPanel panel;
     JLabel shelterHeader1;
     JLabel shelterHeader2;
-
+    JButton backButton;
     ArrayList<JButton> haveShelterButtons = new ArrayList<>();
     ArrayList<JButton> noShelterButtons = new ArrayList<>();
     ArrayList<JButton> vipButtons = new ArrayList<>();
@@ -38,10 +39,14 @@ public class ReportScreen {
         shelterHeader2.setBounds(1000, 100, 200, 50);
         addButtonReport(false, 1000, 100);
 
+        backButton = new JButton("Back");
+        backButton.setBounds(1700, 50, 200, 50);
+
         buttonAction();
 
         main.add(shelterHeader1);
         main.add(shelterHeader2);
+        main.add(backButton);
     }
 
     void addButtonReport(boolean haveShelter, int posX, int posY) {
@@ -73,18 +78,18 @@ public class ReportScreen {
 
     void buttonAction() {
         MyActionListener listener = new MyActionListener();
+        backButton.addActionListener(listener);
         
     }
     private class MyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            JButton source = (JButton)e.getSource();
+            if(source == backButton) {
+                m = new Main();
+                main.dispose();
+            }
         }
-    }
-
-    public static void main(String[] args) {
-        ReportScreen rs = new ReportScreen();
-
     }
 }
 
